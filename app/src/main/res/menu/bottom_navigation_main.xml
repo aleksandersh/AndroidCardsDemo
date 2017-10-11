@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_main_navigation_cards"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/main_navigation_cards_title"/>
+    <item
+        android:id="@+id/action_main_navigation_contacts"
+        android:icon="@android:drawable/stat_sys_speakerphone"
+        android:title="@string/main_navigation_contacts_title"/>
+</menu>

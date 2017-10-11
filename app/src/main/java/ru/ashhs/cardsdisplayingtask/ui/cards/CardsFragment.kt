@@ -17,6 +17,7 @@ import ru.ashhs.cardsdisplayingtask.App
 import ru.ashhs.cardsdisplayingtask.R
 import ru.ashhs.cardsdisplayingtask.network.dto.*
 import ru.ashhs.cardsdisplayingtask.ui.advanced.MinMaxTextWatcher
+import ru.ashhs.cardsdisplayingtask.ui.contacts.ContactsFragment
 import java.util.*
 import javax.inject.Inject
 
@@ -26,10 +27,17 @@ import javax.inject.Inject
  * View with cards.
  */
 class CardsFragment : Fragment(), CardsView {
+
     @Inject
     lateinit var cardsPresenter: CardsPresenter
 
     private lateinit var usersAdapter: UsersAdapter
+
+    companion object {
+        fun newInstance(): CardsFragment {
+            return CardsFragment()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.cards_fragment, container, false)

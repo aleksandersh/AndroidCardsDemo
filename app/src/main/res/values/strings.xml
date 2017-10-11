@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cards displaying task</string>
 
+    <string name="main_navigation_cards_title">Cards</string>
+    <string name="main_navigation_contacts_title">Contacts</string>
+
     <string name="cards_posts_title">Posts</string>
     <string name="cards_posts_confirm_button_title">Confirm</string>
     <string name="cards_posts_id_hint">ID</string>
@@ -18,4 +21,11 @@
     <string name="cards_tasks_next_random_button_title">Next random</string>
     <string name="cards_tasks_completed_image_description">Completed</string>
     <string name="cards_tasks_uncompleted_image_description">Uncompleted</string>
+
+    <string name="contacts_name">Shatalov Aleksandr</string>
+    <string name="contacts_city">Moscow</string>
+    <string name="contacts_phone">8 (925) 802&#8211;84&#8211;34</string>
+    <string name="contacts_website">https://facebook.com/aleksandr.shatalov.180</string>
+    <string name="contacts_email">alexxx.inter@mail.ru</string>
+    <string name="contacts_image_description">Mushrooms</string>
 </resources>
