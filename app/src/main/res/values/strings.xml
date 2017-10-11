@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Cards displaying task</string>
+
+    <string name="cards_posts_title">Posts</string>
+    <string name="cards_posts_confirm_button_title">Confirm</string>
+    <string name="cards_posts_id_hint">ID</string>
+
+    <string name="cards_comments_title">Comments</string>
+    <string name="cards_comments_confirm_button_title">Confirm</string>
+    <string name="cards_comments_id_hint">ID</string>
+
+    <string name="cards_photo_title">Photo</string>
+    <string name="cards_photo_image_description">Photo</string>
+
+    <string name="cards_users_title">Users</string>
+
+    <string name="cards_tasks_title">Tasks</string>
+    <string name="cards_tasks_next_random_button_title">Next random</string>
+    <string name="cards_tasks_completed_image_description">Completed</string>
+    <string name="cards_tasks_uncompleted_image_description">Uncompleted</string>
+</resources>
