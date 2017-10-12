@@ -18,4 +18,5 @@ interface CardsView {
     fun setPhotoDescriptionError()
     fun setTask(task: TaskDto)
     fun setTaskError()
+    fun onLoadError()
 }

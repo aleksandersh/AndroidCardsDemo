@@ -4,6 +4,8 @@
     <string name="main_navigation_cards_title">Cards</string>
     <string name="main_navigation_contacts_title">Contacts</string>
 
+    <string name="cards_load_error">Error loading data</string>
+
     <string name="cards_posts_title">Posts</string>
     <string name="cards_posts_confirm_button_title">Confirm</string>
     <string name="cards_posts_id_hint">ID</string>

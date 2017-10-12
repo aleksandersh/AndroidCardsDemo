@@ -67,5 +67,6 @@ constructor(private val loadPostById: LoadPostById,
 
     override fun onError(error: Throwable) {
         Log.d(CardsPresenter.TAG, error.message ?: error.toString())
+        view?.onLoadError()
     }
 }

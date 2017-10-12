@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.commentscard_cards.*
 import kotlinx.android.synthetic.main.photocard_cards.*
@@ -31,6 +32,7 @@ class CardsFragment : Fragment(), CardsView {
     lateinit var cardsPresenter: CardsPresenter
 
     private lateinit var usersAdapter: UsersAdapter
+    private lateinit var errorToast: Toast
 
     private var lastLoadedPostId: Long? = null
     private var lastLoadedCommentId: Long? = null
@@ -60,6 +62,7 @@ class CardsFragment : Fragment(), CardsView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         cardsPresenter.bindView(this)
+        errorToast = Toast.makeText(context, R.string.cards_load_error, Toast.LENGTH_LONG)
 
         setupPostsCard()
         setupCommentsCard()
@@ -150,7 +153,11 @@ class CardsFragment : Fragment(), CardsView {
         taskTitleTextView.text = ""
 
         taskCompletedImage.visibility = View.INVISIBLE
-        taskUncompletedImage.visibility = View.VISIBLE
+        taskUncompletedImage.visibility = View.INVISIBLE
+    }
+
+    override fun onLoadError() {
+        errorToast.show()
     }
 
     private fun setupPostsCard() {

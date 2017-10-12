@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Задание показа карточек</string>
+
+    <string name="main_navigation_cards_title">Карточки</string>
+    <string name="main_navigation_contacts_title">Контакты</string>
+
+    <string name="cards_load_error">Ошибка загрузки данных</string>
+
+    <string name="cards_posts_title">Сообщения</string>
+    <string name="cards_posts_confirm_button_title">Подтвердить</string>
+    <string name="cards_posts_id_hint">ID</string>
+
+    <string name="cards_comments_title">Комментарии</string>
+    <string name="cards_comments_confirm_button_title">Подтвердить</string>
+    <string name="cards_comments_id_hint">ID</string>
+
+    <string name="cards_photo_title">Фотография</string>
+    <string name="cards_photo_image_description">Фотография</string>
+
+    <string name="cards_users_title">Пользователи</string>
+
+    <string name="cards_tasks_title">Задачи</string>
+    <string name="cards_tasks_next_random_button_title">Следующая случайная</string>
+    <string name="cards_tasks_completed_image_description">Выполнено</string>
+    <string name="cards_tasks_uncompleted_image_description">Не выполнено</string>
+
+    <string name="contacts_name">Шаталов Александр</string>
+    <string name="contacts_city">Москва</string>
+    <string name="contacts_phone">8 (925) 802&#8211;84&#8211;34</string>
+    <string name="contacts_website">https://facebook.com/aleksandr.shatalov.180</string>
+    <string name="contacts_email">alexxx.inter@mail.ru</string>
+    <string name="contacts_image_description">Грибочки</string>
+</resources>
