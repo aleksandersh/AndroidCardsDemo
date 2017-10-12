@@ -56,8 +56,11 @@ constructor(private val loadPostById: LoadPostById,
     }
 
     fun loadRandomTask() {
-        loadFromSingleSource(loadTaskById
-                .single(MIN_TASK_ID + random.nextInt((MAX_TASK_ID - MIN_TASK_ID).toInt())),
+        loadTaskById(MIN_TASK_ID + random.nextInt((MAX_TASK_ID - MIN_TASK_ID).toInt()))
+    }
+
+    fun loadTaskById(@IntRange(from = 1, to = 200) id: Long) {
+        loadFromSingleSource(loadTaskById.single(id),
                 { task -> view?.setTask(task) },
                 { _ -> view?.setTaskError() })
     }

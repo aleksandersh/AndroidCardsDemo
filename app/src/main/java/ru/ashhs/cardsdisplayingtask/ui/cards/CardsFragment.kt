@@ -17,7 +17,6 @@ import ru.ashhs.cardsdisplayingtask.App
 import ru.ashhs.cardsdisplayingtask.R
 import ru.ashhs.cardsdisplayingtask.network.dto.*
 import ru.ashhs.cardsdisplayingtask.ui.advanced.MinMaxTextWatcher
-import ru.ashhs.cardsdisplayingtask.ui.contacts.ContactsFragment
 import java.util.*
 import javax.inject.Inject
 
@@ -33,16 +32,28 @@ class CardsFragment : Fragment(), CardsView {
 
     private lateinit var usersAdapter: UsersAdapter
 
+    private var lastLoadedPostId: Long? = null
+    private var lastLoadedCommentId: Long? = null
+    private var lastLoadedTaskId: Long? = null
+
     companion object {
-        fun newInstance(): CardsFragment {
-            return CardsFragment()
-        }
+        private const val KEY_LAST_LOADED_POST_ID = "last_loaded_post_id"
+        private const val KEY_LAST_LOADED_COMMENT_ID = "last_loaded_comment_id"
+        private const val KEY_LAST_LOADED_TASK_ID = "last_loaded_task_id"
+
+        fun newInstance() = CardsFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.cards_fragment, container, false)
 
         (activity.application as App).appComponent.inject(this)
+
+        if (savedInstanceState != null) {
+            lastLoadedPostId = savedInstanceState.getLong(KEY_LAST_LOADED_POST_ID)
+            lastLoadedCommentId = savedInstanceState.getLong(KEY_LAST_LOADED_COMMENT_ID)
+            lastLoadedTaskId = savedInstanceState.getLong(KEY_LAST_LOADED_TASK_ID)
+        }
 
         return view
     }
@@ -57,7 +68,15 @@ class CardsFragment : Fragment(), CardsView {
 
         cardsPresenter.loadUsers()
         cardsPresenter.loadPhotoDescription()
-        cardsPresenter.loadRandomTask()
+        lastLoadedPostId?.let { cardsPresenter.loadPostById(it) }
+        lastLoadedCommentId?.let { cardsPresenter.loadCommentById(it) }
+        lastLoadedTaskId?.let { cardsPresenter.loadTaskById(it) } ?: cardsPresenter.loadRandomTask()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        lastLoadedPostId?.let { outState.putLong(KEY_LAST_LOADED_POST_ID, it) }
+        lastLoadedCommentId?.let { outState.putLong(KEY_LAST_LOADED_COMMENT_ID, it) }
+        lastLoadedTaskId?.let { outState.putLong(KEY_LAST_LOADED_TASK_ID, it) }
     }
 
     override fun onDestroyView() {
@@ -67,6 +86,7 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setPost(post: PostDto) {
+        lastLoadedPostId = post.id
         postTitleTextView.text = post.title
         postTextTextView.text = post.text
     }
@@ -77,6 +97,7 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setComment(comment: CommentDto) {
+        lastLoadedCommentId = comment.id
         commentEmailTextView.text = comment.email
         commentTitleTextView.text = comment.title
         commentTextTextView.text = comment.text
@@ -112,6 +133,8 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setTask(task: TaskDto) {
+        lastLoadedTaskId = task.id
+
         taskTitleTextView.text = task.title ?: ""
 
         if (task.completed == true) {
