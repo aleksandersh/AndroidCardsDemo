@@ -23,7 +23,7 @@ open class Presenter<T> {
         compositeDisposable.clear()
     }
 
-    protected fun <T> loadFromSingleSource(source: Single<T>, onCompleteMethod: (T) -> Unit, onErrorMethod: (Throwable) -> Unit) {
+    protected fun <U> loadFromSingleSource(source: Single<U>, onCompleteMethod: (U) -> Unit, onErrorMethod: (Throwable) -> Unit) {
         compositeDisposable.add(source
                 .subscribe(onCompleteMethod,
                         { error ->

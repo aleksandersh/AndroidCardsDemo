@@ -19,12 +19,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            bottomNavigationView.selectedItemId = R.id.action_main_navigation_cards
+            replaceFragment(CardsFragment.newInstance())
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            bottomNavigationView.selectedItemId -> false
             R.id.action_main_navigation_cards -> {
                 replaceFragment(CardsFragment.newInstance())
                 true

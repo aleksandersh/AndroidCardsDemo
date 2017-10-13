@@ -21,7 +21,13 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
             private val routesServiceApi: RoutesServiceApi) {
 
+    private var cache: List<UserDto>? = null
+
     fun single(number: Int): Single<List<UserDto>> {
+        if (cache != null) {
+            return Single.just(cache)
+        }
+
         val sources: List<SingleSource<UserDto>> = MutableList(number,
                 { index -> routesServiceApi.getUserById(index.toLong() + 1) })
 
@@ -29,5 +35,6 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
                 .toList()
                 .subscribeOn(workerThread)
                 .observeOn(uiThread)
+                .doOnSuccess { cache = it }
     }
 }

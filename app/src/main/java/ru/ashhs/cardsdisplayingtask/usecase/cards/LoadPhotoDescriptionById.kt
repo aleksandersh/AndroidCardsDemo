@@ -20,9 +20,16 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
             private val routesServiceApi: RoutesServiceApi) {
 
+    private var cache: PhotoDescriptionDto? = null
+
     fun single(id: Long): Single<PhotoDescriptionDto> {
+        if (cache?.id == id) {
+            return Single.just(cache)
+        }
+
         return routesServiceApi.getPhotoDescriptionById(id)
                 .subscribeOn(workerThread)
                 .observeOn(uiThread)
+                .doOnSuccess { cache = it }
     }
 }
