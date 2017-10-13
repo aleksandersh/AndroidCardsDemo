@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cards displaying task</string>
+    <string name="app_name">Demo: Cards</string>
 
     <string name="main_navigation_cards_title">Cards</string>
     <string name="main_navigation_contacts_title">Contacts</string>
