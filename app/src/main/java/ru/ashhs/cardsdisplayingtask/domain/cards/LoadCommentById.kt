@@ -2,8 +2,8 @@ package ru.ashhs.cardsdisplayingtask.domain.cards
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import ru.ashhs.cardsdisplayingtask.data.network.RoutesServiceApi
 import ru.ashhs.cardsdisplayingtask.data.network.dto.CommentDto
+import ru.ashhs.cardsdisplayingtask.data.repository.routes.RoutesRepository
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -18,18 +18,11 @@ class LoadCommentById
 @Inject
 constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
-            private val routesServiceApi: RoutesServiceApi) {
-
-    private var cache: CommentDto? = null
+            private val routesRepository: RoutesRepository) {
 
     fun single(id: Long): Single<CommentDto> {
-        if (cache?.id == id) {
-            return Single.just(cache)
-        }
-
-        return routesServiceApi.getCommentById(id)
+        return routesRepository.getCommentById(id)
                 .subscribeOn(workerThread)
                 .observeOn(uiThread)
-                .doOnSuccess { cache = it }
     }
 }

@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
+import ru.ashhs.cardsdisplayingtask.data.network.RoutesServiceApi
+import ru.ashhs.cardsdisplayingtask.data.repository.routes.RoutesRepository
+import ru.ashhs.cardsdisplayingtask.data.repository.routes.SimpleRoutesCache
 import ru.ashhs.cardsdisplayingtask.data.sharedpreferences.SharedPreferencesHelper
 import javax.inject.Named
 import javax.inject.Singleton
@@ -25,5 +28,11 @@ class DataModule {
             @Named("DefaultSharedPreferences") sharedPreferences: SharedPreferences):
             SharedPreferencesHelper {
         return SharedPreferencesHelper(sharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoutesRepository(serviceApi: RoutesServiceApi): RoutesRepository {
+        return RoutesRepository(serviceApi, SimpleRoutesCache())
     }
 }
