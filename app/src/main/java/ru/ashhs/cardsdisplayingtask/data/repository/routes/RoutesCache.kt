@@ -2,6 +2,8 @@ package ru.ashhs.cardsdisplayingtask.data.repository.routes
 
 /**
  * Created by AleksanderSh on 02.11.2017.
+ *
+ * Interface for caching data from routers service.
  */
 interface RoutesCache {
 

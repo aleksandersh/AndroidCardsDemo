@@ -22,5 +22,5 @@ class AppModule(private val context: Context) {
     @Provides
     @Singleton
     @Named("UiThread")
-    fun provideUiScheduler() = AndroidSchedulers.mainThread()
+    fun provideUiScheduler() = AndroidSchedulers.mainThread()!!
 }
