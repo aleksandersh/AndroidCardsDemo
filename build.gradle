@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlinVersion = '1.1.51'
-    ext.gradleVersion = '3.0.0-beta7'
+    ext.gradleVersion = '3.0.0'
     repositories {
         google()
         jcenter()
@@ -22,6 +22,7 @@ allprojects {
         rxandroidVersion = '2.0.1'
         retrofit2Version = '2.3.0'
         picassoVersion = '2.5.2'
+        mockitoVersion = '2.11.0'
     }
 
     repositories {
