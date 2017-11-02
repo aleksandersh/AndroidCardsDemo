@@ -1,9 +1,9 @@
-package ru.ashhs.cardsdisplayingtask.usecase.cards
+package ru.ashhs.cardsdisplayingtask.domain.cards
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import ru.ashhs.cardsdisplayingtask.network.RoutesServiceApi
-import ru.ashhs.cardsdisplayingtask.network.dto.PostDto
+import ru.ashhs.cardsdisplayingtask.data.network.RoutesServiceApi
+import ru.ashhs.cardsdisplayingtask.data.network.dto.PostDto
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton

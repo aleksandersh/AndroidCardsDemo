@@ -1,9 +1,9 @@
-package ru.ashhs.cardsdisplayingtask.ui.cards
+package ru.ashhs.cardsdisplayingtask.presentation.cards
 
 import android.support.annotation.IntRange
 import android.util.Log
-import ru.ashhs.cardsdisplayingtask.ui.Presenter
-import ru.ashhs.cardsdisplayingtask.usecase.cards.*
+import ru.ashhs.cardsdisplayingtask.presentation.Presenter
+import ru.ashhs.cardsdisplayingtask.domain.cards.*
 import java.util.*
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui.cards
+package ru.ashhs.cardsdisplayingtask.presentation.cards
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.usercard_cards.*
 import ru.ashhs.cardsdisplayingtask.App
 import ru.ashhs.cardsdisplayingtask.R
 import ru.ashhs.cardsdisplayingtask.data.sharedpreferences.SharedPreferencesHelper
-import ru.ashhs.cardsdisplayingtask.network.dto.*
-import ru.ashhs.cardsdisplayingtask.ui.advanced.MinMaxTextWatcher
+import ru.ashhs.cardsdisplayingtask.data.network.dto.*
+import ru.ashhs.cardsdisplayingtask.presentation.advanced.MinMaxTextWatcher
 import java.util.*
 import javax.inject.Inject
 

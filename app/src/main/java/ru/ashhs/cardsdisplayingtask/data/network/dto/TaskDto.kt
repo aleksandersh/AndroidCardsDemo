@@ -1,15 +1,15 @@
-package ru.ashhs.cardsdisplayingtask.network.dto
+package ru.ashhs.cardsdisplayingtask.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * Created by AleksanderSh on 09.10.2017.
  *
- * Data transfer object of Post for jsonplaceholder service api.
+ * Data transfer object of Task for jsonplaceholder service api.
  */
-data class PostDto(
+data class TaskDto(
         @SerializedName("id") val id: Long?,
         @SerializedName("userId") val userId: Long?,
         @SerializedName("title") val title: String?,
-        @SerializedName("body") val text: String?
+        @SerializedName("completed") val completed: Boolean?
 )

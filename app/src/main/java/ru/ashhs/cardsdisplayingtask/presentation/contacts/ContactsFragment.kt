@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui.contacts
+package ru.ashhs.cardsdisplayingtask.presentation.contacts
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

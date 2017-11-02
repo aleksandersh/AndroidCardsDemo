@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui.main
+package ru.ashhs.cardsdisplayingtask.presentation.main
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.ashhs.cardsdisplayingtask.R
-import ru.ashhs.cardsdisplayingtask.ui.cards.CardsFragment
-import ru.ashhs.cardsdisplayingtask.ui.contacts.ContactsFragment
+import ru.ashhs.cardsdisplayingtask.presentation.cards.CardsFragment
+import ru.ashhs.cardsdisplayingtask.presentation.contacts.ContactsFragment
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 

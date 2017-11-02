@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui.advanced
+package ru.ashhs.cardsdisplayingtask.presentation.advanced
 
 import android.text.Editable
 import android.text.TextWatcher

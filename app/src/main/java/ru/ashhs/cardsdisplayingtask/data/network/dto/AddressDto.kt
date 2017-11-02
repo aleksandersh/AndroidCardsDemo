@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.network.dto
+package ru.ashhs.cardsdisplayingtask.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 

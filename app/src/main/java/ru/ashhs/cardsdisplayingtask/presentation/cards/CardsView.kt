@@ -1,6 +1,6 @@
-package ru.ashhs.cardsdisplayingtask.ui.cards
+package ru.ashhs.cardsdisplayingtask.presentation.cards
 
-import ru.ashhs.cardsdisplayingtask.network.dto.*
+import ru.ashhs.cardsdisplayingtask.data.network.dto.*
 
 /**
  * Created by AleksanderSh on 09.10.2017.

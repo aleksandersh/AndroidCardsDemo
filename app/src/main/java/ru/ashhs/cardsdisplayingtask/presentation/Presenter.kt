@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui
+package ru.ashhs.cardsdisplayingtask.presentation
 
 import android.util.Log
 import io.reactivex.Single

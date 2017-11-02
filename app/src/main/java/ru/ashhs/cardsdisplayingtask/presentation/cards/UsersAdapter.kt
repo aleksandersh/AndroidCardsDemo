@@ -1,4 +1,4 @@
-package ru.ashhs.cardsdisplayingtask.ui.cards
+package ru.ashhs.cardsdisplayingtask.presentation.cards
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_userscard_cards.view.*
 import ru.ashhs.cardsdisplayingtask.R
-import ru.ashhs.cardsdisplayingtask.network.dto.UserDto
+import ru.ashhs.cardsdisplayingtask.data.network.dto.UserDto
 import java.util.*
 
 /**

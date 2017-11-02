@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="32dp"
-        tools:context="ru.ashhs.cardsdisplayingtask.ui.contacts.ContactsFragment">
+        tools:context="ru.ashhs.cardsdisplayingtask.presentation.contacts.ContactsFragment">
 
         <ImageView
             android:id="@+id/contactsImage"

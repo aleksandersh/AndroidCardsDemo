@@ -1,9 +1,9 @@
-package ru.ashhs.cardsdisplayingtask.network
+package ru.ashhs.cardsdisplayingtask.data.network
 
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
-import ru.ashhs.cardsdisplayingtask.network.dto.*
+import ru.ashhs.cardsdisplayingtask.data.network.dto.*
 
 /**
  * Created by AleksanderSh on 09.10.2017.
