@@ -21,7 +21,7 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
             private val routesRepository: RoutesRepository) {
 
-    fun single(number: Int): Single<List<UserDto>> {
+    operator fun invoke(number: Int): Single<List<UserDto>> {
         val sources: List<SingleSource<UserDto>> = MutableList(number,
                 { index -> routesRepository.getUserById(index.toLong() + 1) })
 

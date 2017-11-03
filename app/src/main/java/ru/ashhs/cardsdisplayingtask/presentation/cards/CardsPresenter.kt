@@ -1,9 +1,8 @@
 package ru.ashhs.cardsdisplayingtask.presentation.cards
 
-import android.support.annotation.IntRange
 import android.util.Log
-import ru.ashhs.cardsdisplayingtask.presentation.Presenter
 import ru.ashhs.cardsdisplayingtask.domain.cards.*
+import ru.ashhs.cardsdisplayingtask.presentation.Presenter
 import java.util.*
 import javax.inject.Inject
 
@@ -31,41 +30,69 @@ constructor(private val loadPostById: LoadPostById,
         const val MAX_TASK_ID: Long = 200
     }
 
-    fun loadPostById(@IntRange(from = 1, to = 100) id: Long) {
-        loadFromSingleSource(loadPostById.single(id),
-                { post -> view?.setPost(post) },
-                { _ -> view?.setPostError() })
+    fun onPostRequested(textId: String) {
+        val id = textId.toLongOrNull() ?: 0
+        if (id < 1 || 100 < id) return
+
+        loadPostById(id)
+                .doOnError { error -> onError(error) }
+                .subscribe(
+                        { post -> view?.setPost(post) },
+                        { _ -> view?.setPostError() })
+                .collect()
     }
 
-    fun loadCommentById(@IntRange(from = 1, to = 500) id: Long) {
-        loadFromSingleSource(loadCommentById.single(id),
-                { comment -> view?.setComment(comment) },
-                { _ -> view?.setCommentError() })
+    fun onCommentRequested(textId: String) {
+        val id = textId.toLongOrNull() ?: 0
+        if (id < 1 || 500 < id) return
+
+        loadCommentById(id)
+                .doOnError { error -> onError(error) }
+                .subscribe(
+                        { comment -> view?.setComment(comment) },
+                        { _ -> view?.setCommentError() })
+                .collect()
     }
 
-    fun loadUsers() {
-        loadFromSingleSource(loadUsers.single(USERS_COUNT),
-                { users -> view?.setUsers(users) },
-                { _ -> view?.setUsersError() })
+    fun onUsersRequested() {
+        loadUsers(USERS_COUNT)
+                .doOnError { error -> onError(error) }
+                .subscribe(
+                        { users -> view?.setUsers(users) },
+                        { _ -> view?.setUsersError() })
+                .collect()
     }
 
-    fun loadPhotoDescription() {
-        loadFromSingleSource(loadPhotoDescriptionById.single(PHOTO_ID),
-                { photoDescription -> view?.setPhotoDescription(photoDescription) },
-                { _ -> view?.setPhotoDescriptionError() })
+    fun onPhotoDescriptionRequested() {
+        loadPhotoDescriptionById(PHOTO_ID)
+                .doOnError { error -> onError(error) }
+                .subscribe(
+                        { photoDescription -> view?.setPhotoDescription(photoDescription) },
+                        { _ -> view?.setPhotoDescriptionError() })
+                .collect()
     }
 
-    fun loadRandomTask() {
-        loadTaskById(MIN_TASK_ID + random.nextInt((MAX_TASK_ID - MIN_TASK_ID).toInt()))
+    fun onRandomTaskRequested() {
+        onTaskRequested(MIN_TASK_ID + random.nextInt((MAX_TASK_ID - MIN_TASK_ID).toInt()))
     }
 
-    fun loadTaskById(@IntRange(from = 1, to = 200) id: Long) {
-        loadFromSingleSource(loadTaskById.single(id),
-                { task -> view?.setTask(task) },
-                { _ -> view?.setTaskError() })
+    fun onTaskRequested(textId: String) {
+        val id = textId.toLongOrNull() ?: 0
+        if (id < 1 || 500 < id) return
+
+        onTaskRequested(id)
     }
 
-    override fun onError(error: Throwable) {
+    private fun onTaskRequested(id: Long) {
+        loadTaskById(id)
+                .doOnError { error -> onError(error) }
+                .subscribe(
+                        { task -> view?.setTask(task) },
+                        { _ -> view?.setTaskError() })
+                .collect()
+    }
+
+    private fun onError(error: Throwable) {
         Log.d(CardsPresenter.TAG, error.message ?: error.toString())
         view?.onLoadError()
     }

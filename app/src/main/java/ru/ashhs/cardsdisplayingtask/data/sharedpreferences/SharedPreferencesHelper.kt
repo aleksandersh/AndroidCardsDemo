@@ -17,42 +17,33 @@ constructor(private val sharedPreferences: SharedPreferences) {
         private const val KEY_LAST_LOADED_TASK_ID = "last_loaded_task_id"
     }
 
-    fun saveLastLoadedPostId(id: Long) {
+    fun saveLastLoadedPostId(id: String) {
         sharedPreferences.edit()
-                .putLong(KEY_LAST_LOADED_POST_ID, id)
+                .putString(KEY_LAST_LOADED_POST_ID, id)
                 .apply()
     }
 
-    fun getLastLoadedPostId(): Long? {
-        return when (sharedPreferences.contains(KEY_LAST_LOADED_POST_ID)) {
-            true -> sharedPreferences.getLong(KEY_LAST_LOADED_POST_ID, 0)
-            false -> null
-        }
+    fun getLastLoadedPostId(): String {
+        return sharedPreferences.getString(KEY_LAST_LOADED_POST_ID, "")
     }
 
-    fun saveLastLoadedCommentId(id: Long) {
+    fun saveLastLoadedCommentId(id: String) {
         sharedPreferences.edit()
-                .putLong(KEY_LAST_LOADED_COMMENT_ID, id)
+                .putString(KEY_LAST_LOADED_COMMENT_ID, id)
                 .apply()
     }
 
-    fun getLastLoadedCommentId(): Long? {
-        return when (sharedPreferences.contains(KEY_LAST_LOADED_COMMENT_ID)) {
-            true -> sharedPreferences.getLong(KEY_LAST_LOADED_COMMENT_ID, 0)
-            false -> null
-        }
+    fun getLastLoadedCommentId(): String {
+        return sharedPreferences.getString(KEY_LAST_LOADED_COMMENT_ID, "")
     }
 
-    fun saveLastLoadedTaskId(id: Long) {
+    fun saveLastLoadedTaskId(id: String) {
         sharedPreferences.edit()
-                .putLong(KEY_LAST_LOADED_TASK_ID, id)
+                .putString(KEY_LAST_LOADED_TASK_ID, id)
                 .apply()
     }
 
-    fun getLastLoadedTaskId(): Long? {
-        return when (sharedPreferences.contains(KEY_LAST_LOADED_TASK_ID)) {
-            true -> sharedPreferences.getLong(KEY_LAST_LOADED_TASK_ID, 0)
-            false -> null
-        }
+    fun getLastLoadedTaskId(): String {
+        return sharedPreferences.getString(KEY_LAST_LOADED_TASK_ID, "")
     }
 }

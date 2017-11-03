@@ -20,7 +20,7 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
             private val routesRepository: RoutesRepository) {
 
-    fun single(id: Long): Single<PhotoDescriptionDto> {
+    operator fun invoke(id: Long): Single<PhotoDescriptionDto> {
         return routesRepository.getPhotoDescriptionById(id)
                 .subscribeOn(workerThread)
                 .observeOn(uiThread)

@@ -16,9 +16,11 @@ import kotlinx.android.synthetic.main.taskscard_cards.*
 import kotlinx.android.synthetic.main.usercard_cards.*
 import ru.ashhs.cardsdisplayingtask.App
 import ru.ashhs.cardsdisplayingtask.R
-import ru.ashhs.cardsdisplayingtask.data.sharedpreferences.SharedPreferencesHelper
 import ru.ashhs.cardsdisplayingtask.data.network.dto.*
+import ru.ashhs.cardsdisplayingtask.data.sharedpreferences.SharedPreferencesHelper
 import ru.ashhs.cardsdisplayingtask.presentation.advanced.MinMaxTextWatcher
+import ru.ashhs.cardsdisplayingtask.utils.ifIsEmpty
+import ru.ashhs.cardsdisplayingtask.utils.ifIsNotEmpty
 import java.util.*
 import javax.inject.Inject
 
@@ -58,18 +60,21 @@ class CardsFragment : Fragment(), CardsView {
         setupUsersCard()
         setupTasksCard()
 
-        cardsPresenter.loadUsers()
-        cardsPresenter.loadPhotoDescription()
-        sharedPreferencesHelper.getLastLoadedPostId()?.let {
-            postIdEditText.setText(it.toString())
-            cardsPresenter.loadPostById(it)
-        }
-        sharedPreferencesHelper.getLastLoadedCommentId()?.let {
-            commentIdEditText.setText(it.toString())
-            cardsPresenter.loadCommentById(it)
-        }
+        cardsPresenter.onUsersRequested()
+        cardsPresenter.onPhotoDescriptionRequested()
+        sharedPreferencesHelper.getLastLoadedPostId()
+                .ifIsNotEmpty {
+                    postIdEditText.setText(it)
+                    cardsPresenter.onPostRequested(it)
+                }
+        sharedPreferencesHelper.getLastLoadedCommentId()
+                .ifIsNotEmpty {
+                    commentIdEditText.setText(it)
+                    cardsPresenter.onCommentRequested(it)
+                }
         sharedPreferencesHelper.getLastLoadedTaskId()
-                ?.let { cardsPresenter.loadTaskById(it) } ?: cardsPresenter.loadRandomTask()
+                .ifIsEmpty { cardsPresenter.onRandomTaskRequested() }
+                .ifIsNotEmpty { cardsPresenter.onTaskRequested(it) }
     }
 
     override fun onDestroyView() {
@@ -79,7 +84,7 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setPost(post: PostDto) {
-        post.id?.let { sharedPreferencesHelper.saveLastLoadedPostId(it) }
+        post.id?.let { sharedPreferencesHelper.saveLastLoadedPostId(it.toString()) }
         postTitleTextView.text = post.title
         postTextTextView.text = post.text
     }
@@ -90,7 +95,7 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setComment(comment: CommentDto) {
-        comment.id?.let { sharedPreferencesHelper.saveLastLoadedCommentId(it) }
+        comment.id?.let { sharedPreferencesHelper.saveLastLoadedCommentId(it.toString()) }
         commentEmailTextView.text = comment.email
         commentTitleTextView.text = comment.title
         commentTextTextView.text = comment.text
@@ -126,7 +131,7 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     override fun setTask(task: TaskDto) {
-        task.id?.let { sharedPreferencesHelper.saveLastLoadedTaskId(it) }
+        task.id?.let { sharedPreferencesHelper.saveLastLoadedTaskId(it.toString()) }
 
         taskTitleTextView.text = task.title ?: ""
 
@@ -156,8 +161,7 @@ class CardsFragment : Fragment(), CardsView {
                 { postsConfirmButton.isEnabled = true }))
 
         postsConfirmButton.setOnClickListener({ _ ->
-            cardsPresenter
-                    .loadPostById(postIdEditText.text.toString().toLongOrNull() ?: 0)
+            cardsPresenter.onPostRequested(postIdEditText.text.toString())
         })
     }
 
@@ -167,8 +171,7 @@ class CardsFragment : Fragment(), CardsView {
                 { commentsConfirmButton.isEnabled = true }))
 
         commentsConfirmButton.setOnClickListener({ _ ->
-            cardsPresenter
-                    .loadCommentById(commentIdEditText.text.toString().toLongOrNull() ?: 0)
+            cardsPresenter.onCommentRequested(commentIdEditText.text.toString())
         })
     }
 
@@ -185,6 +188,6 @@ class CardsFragment : Fragment(), CardsView {
     }
 
     private fun setupTasksCard() {
-        tasksNextRandomButton.setOnClickListener { _ -> cardsPresenter.loadRandomTask() }
+        tasksNextRandomButton.setOnClickListener { _ -> cardsPresenter.onRandomTaskRequested() }
     }
 }

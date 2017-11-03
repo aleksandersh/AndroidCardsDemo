@@ -1,5 +1,6 @@
 package ru.ashhs.cardsdisplayingtask.domain.cards
 
+import android.support.annotation.IntRange
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import ru.ashhs.cardsdisplayingtask.data.network.dto.TaskDto
@@ -20,7 +21,7 @@ constructor(@Named("WorkerThread") private val workerThread: Scheduler,
             @Named("UiThread") private val uiThread: Scheduler,
             private val routesRepository: RoutesRepository) {
 
-    fun single(id: Long): Single<TaskDto> {
+    operator fun invoke(@IntRange(from = 1, to = 200) id: Long): Single<TaskDto> {
         return routesRepository.getTaskById(id)
                 .subscribeOn(workerThread)
                 .observeOn(uiThread)
